@@ -23,8 +23,8 @@ ADDED_KNOWLEDGE_LIST_PATH = DATA_DIR / "knowledge_add_clean_list.json"
 VERIFIED_KB_PATH = DATA_DIR / "correct_verified_knowledge.json"
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
-OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", "https://api.wapq.cn/v1")
-OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-5.5")
+OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", "")
+OPENAI_MODEL = os.getenv("OPENAI_MODEL", "")
 OPENAI_MODEL_CORRECT = os.getenv("OPENAI_MODEL_CORRECT", OPENAI_MODEL)
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
@@ -36,7 +36,7 @@ GEMINI_API_KEY_LIST = [
 GEMINI_BASE_URL = os.getenv("GEMINI_BASE_URL", "")
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-pro")
 
-LLM_PROVIDER = os.getenv("LLM_PROVIDER", "openai")
+LLM_PROVIDER = os.getenv("LLM_PROVIDER", "")
 
 DB_HOST = os.getenv("SR_HOST", "")
 DB_PORT = int(os.getenv("SR_PORT", "9030"))

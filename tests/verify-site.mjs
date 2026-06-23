@@ -135,9 +135,9 @@ assertIncludes(
   configExample,
   [
     'OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")',
-    'OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", "https://api.wapq.cn/v1")',
-    'OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-5.5")',
-    'LLM_PROVIDER = os.getenv("LLM_PROVIDER", "openai")'
+    'OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", "")',
+    'OPENAI_MODEL = os.getenv("OPENAI_MODEL", "")',
+    'LLM_PROVIDER = os.getenv("LLM_PROVIDER", "")'
   ],
   "docs/source/pipeline/config.example.py"
 );
@@ -167,6 +167,7 @@ assert.ok(statSync(imagePath).size > 100_000, "certificate preview should be a r
 assert.ok(statSync(architectureImagePath).size > 100_000, "architecture preview should be a rendered image, not a placeholder");
 
 const secretPattern = /(sk-[A-Za-z0-9][A-Za-z0-9._-]{10,}|AIza[0-9A-Za-z_-]{20,}|AKIA[0-9A-Z]{16}|172\.22\.194\.247|ghz\d{4}\.{2}|PASSWORD\s*=\s*["'][^"']+["'])/;
+const removedPublicConfigPattern = /(https:\/\/api\.wapq\.cn\/v1|gpt-5\.5|LLM_PROVIDER\s*=\s*os\.getenv\("LLM_PROVIDER",\s*"openai"\))/;
 const textExtensions = new Set([".html", ".md", ".mjs", ".py", ".json", ".txt", ".css"]);
 const publicFiles = [
   join(root, "README.md"),
@@ -177,6 +178,7 @@ const publicFiles = [
 for (const file of publicFiles) {
   const text = readText(file);
   assert.ok(!secretPattern.test(text), `public file must not contain secrets: ${relative(root, file)}`);
+  assert.ok(!removedPublicConfigPattern.test(text), `public file must not contain removed public LLM defaults: ${relative(root, file)}`);
   assert.ok(!/[鏁甯楂璁闄][^\n]{0,12}[�€]/.test(text), `public file appears mojibaked: ${relative(root, file)}`);
 }
 

@@ -33,13 +33,4 @@ The core idea is an Agentic Workflow with closed-loop knowledge evolution:
 
 ## Reproduction Notes
 
-Copy `pipeline/config.example.py` to `pipeline/config.py`, set the required environment variables, and prepare the original competition data files locally. The public snapshot intentionally omits private data, credentials, and large generated artifacts.
-
-The public template defaults to the OpenAI-compatible endpoint `https://api.wapq.cn/v1` and model `gpt-5.5`. Keep the real API key local, for example:
-
-```powershell
-$env:OPENAI_API_KEY = "<your-local-key>"
-$env:OPENAI_BASE_URL = "https://api.wapq.cn/v1"
-$env:OPENAI_MODEL = "gpt-5.5"
-$env:LLM_PROVIDER = "openai"
-```
+Copy `pipeline/config.example.py` to `pipeline/config.py`, set the required environment variables locally, and prepare the original competition data files locally. The public snapshot intentionally omits private data, credentials, model endpoint defaults, and large generated artifacts.
