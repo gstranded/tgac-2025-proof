@@ -50,6 +50,7 @@ assert.ok(existsSync(sourceReadmePath), "sanitized source README must exist");
 const html = readText(indexPath);
 const readme = readText(join(root, "README.md"));
 const sourceReadme = readText(sourceReadmePath);
+const configExample = readText(join(sourceDir, "pipeline", "config.example.py"));
 const gitignore = readText(gitignorePath);
 
 assertIncludes(
@@ -128,6 +129,17 @@ assertIncludes(
     "config.example.py"
   ],
   "docs/source/README.md"
+);
+
+assertIncludes(
+  configExample,
+  [
+    'OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")',
+    'OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", "https://api.wapq.cn/v1")',
+    'OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-5.5")',
+    'LLM_PROVIDER = os.getenv("LLM_PROVIDER", "openai")'
+  ],
+  "docs/source/pipeline/config.example.py"
 );
 
 const requiredSourceFiles = [
